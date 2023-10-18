@@ -5,3 +5,10 @@ express is the main framework
 jsonwebtoken is for authentication and authorization
 Mongoose is a dependency which communicate with MondoDB. 
 nodemon is for automatically updating restarting the server when there is change
+
+
+node version
+v18.17.0
+
+direct to the backend dir and type
+` npm install
