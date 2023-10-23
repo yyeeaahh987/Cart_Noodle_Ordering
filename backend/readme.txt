@@ -8,7 +8,7 @@ nodemon is for automatically updating restarting the server when there is change
 
 
 node version
-v18.17.0
+v18.18.2
 
 direct to the backend dir and type
 ` npm install
