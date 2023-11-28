@@ -17,7 +17,7 @@ const Login = () => {
     e.preventDefaulr();
 
     try {
-      const res = await fetch("/auth/login", {
+      const res = await fetch("ttp://localhost:5001/auth/login", {
         headers: {
           "Content-Type": "application/json",
         },
