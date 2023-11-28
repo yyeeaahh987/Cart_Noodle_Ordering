@@ -10,7 +10,7 @@ const verifyToken = (req, res, next) => {
     req.headers.authorization &&
     req.headers.authorization.startWith("Bearer ")
   ) {
-    const token = req.headers.authorization.substr(7);
+    const token = req.headers.authorization.split(" ")[1];
     const decoded = jwt.verify(
       token,
       process.env.JWT_SECRET_KEY,
@@ -36,7 +36,7 @@ const verifyTokenAdmin = (req, res, next) => {
     req.headers.authorization &&
     req.headers.authorization.startWith("Bearer ")
   ) {
-    const token = req.headers.authorization.substr(7);
+    const token = req.headers.authorization.split(" ")[1];
     const decoded = jwt.verify(
       token,
       process.env.JWT_SECRET_KEY,

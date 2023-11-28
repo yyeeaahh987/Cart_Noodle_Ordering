@@ -2,8 +2,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 import classes from "./navbar.module.css";
 import { AiOutlineUser, AiOutlineShoppingCart } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../../redux/authSlice";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
+
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
@@ -37,7 +48,9 @@ const Navbar = () => {
             <AiOutlineShoppingCart className={classes.cartIcon} />
             <div className={classes.cartQuantity}>0</div>
           </Link>
-          <button className={classes.logout}>Logout</button>
+          <button onClick={handleLogout()} className={classes.logout}>
+            Logout
+          </button>
         </div>
       </div>
     </div>
