@@ -6,13 +6,6 @@
   top: 0;
   left: 0;
   background-color: #fff;
-  z-index: 99999;
-}
-
-.scrolled {
-  box-shadow: -5px 5px 19px -5px rgba(0, 0, 0, 0.08);
-  -webkit-box-shadow: -5px 5px 19px -5px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: -5px 5px 19px -5px rgba(0, 0, 0, 0.08);
 }
 
 .wrapper {
