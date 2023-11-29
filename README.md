@@ -19,11 +19,13 @@ Use below commands to install library
 
 Use Terminal / Powershell in the root directory
 
+### backend part
+
+> cd backend
+> npx nodemon
+
+### frontend part
+
 > cd client
 > npm start
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+> Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
