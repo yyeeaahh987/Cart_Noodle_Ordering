@@ -27,7 +27,7 @@ const FoodCatalog = () => {
       setFilteredFoods(data);
     };
     fetchFoodType();
-  });
+  }, [foodEndpoint, token]);
 
   return (
     <div className={classes.container}>

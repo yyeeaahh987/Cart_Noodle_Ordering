@@ -14,7 +14,7 @@ const Create = () => {
   const [price, setPrice] = useState("");
   const [review, setReview] = useState("");
   const { token } = useSelector((state) => state.auth);
-  const { navigate } = useNavigate();
+  const navigate = useNavigate();
 
   const onChangeFile = (e) => {
     setImage(e.target.files[0]);
@@ -45,15 +45,6 @@ const Create = () => {
         });
       }
 
-      // const res = await axios.post("http://localhost:5001/auth/login", {
-      //   title,
-      //   description,
-      //   category,
-      //   img: filename,
-      //   price,
-      //   review,
-      // });
-
       const res = await fetch("http://localhost:5001/product", {
         headers: {
           "Content-Type": "application/json",
@@ -72,7 +63,7 @@ const Create = () => {
 
       const food = await res.json();
 
-      navigate(`/foods/${food._id}`);
+      navigate(`/food/${food._id}`);
     } catch (error) {
       console.error(error.message);
     }

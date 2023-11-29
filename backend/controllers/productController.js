@@ -18,8 +18,9 @@ productController.get("/find/:id", verifyToken, async (req, res) => {
     const productID = req.params.id;
     const product = await Product.findById(productID);
     if (!product) {
-      return res.status(500).json("Product not found");
+      return res.status(500).json({ msg: "Product not found" });
     }
+    console.log(product);
     return res.status(200).json(product);
   } catch (err) {
     console.error(err);

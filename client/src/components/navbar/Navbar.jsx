@@ -32,7 +32,7 @@ const Navbar = () => {
               <Link to="/contacts">Contacts</Link>
             </li>
             <li className={classes.listItem}>
-              <a href="#foods">Food</a>
+              <a href="/#foods">Food</a>
             </li>
             <li className={classes.listItem}>
               <Link to="/FAQ">FAQ</Link>
