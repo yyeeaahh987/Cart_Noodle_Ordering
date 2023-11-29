@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import img from "../../assets/womaneating.jpg";
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/authSlice";
+import axios from "axios";
 
 const Signup = () => {
   const [username, setUsername] = useState("");
@@ -18,19 +19,24 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:5001/auth/register", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify({ username, email, password }),
+      const res = await axios.post("http://localhost:5001/auth/register", {
+        username,
+        email,
+        password,
       });
+      // const res = await fetch("http://localhost:5001/auth/register", {
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   method: "POST",
+      //   body: JSON.stringify({ username, email, password }),
+      // });
+      // const data = await res.json();
 
-      const data = await res.json();
-      dispatch(register(data));
-
+      dispatch(register(res.data));
       navigate("/");
     } catch (error) {
+      alert(error.response.data);
       setError(true);
       setTimeout(() => {
         setError(false);

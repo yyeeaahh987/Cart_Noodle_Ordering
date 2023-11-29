@@ -26,19 +26,19 @@ const Navbar = () => {
         <div className={classes.left}>
           <ul className={classes.list}>
             <li className={classes.listItem}>
-              <a href="#home">Home</a>
+              <Link to="/">Home</Link>
             </li>
             <li className={classes.listItem}>
-              <a href="#contacts">Contacts</a>
+              <Link to="/contacts">Contacts</Link>
             </li>
             <li className={classes.listItem}>
               <a href="#foods">Food</a>
             </li>
             <li className={classes.listItem}>
-              <a href="#FAQ">FAQ</a>
+              <Link to="/FAQ">FAQ</Link>
             </li>
             <li className={classes.listItem}>
-              <a href="/create">Create</a>
+              <Link to="/create">Create</Link>
             </li>
           </ul>
         </div>
@@ -48,7 +48,7 @@ const Navbar = () => {
             <AiOutlineShoppingCart className={classes.cartIcon} />
             <div className={classes.cartQuantity}>0</div>
           </Link>
-          <button onClick={handleLogout()} className={classes.logout}>
+          <button onClick={() => handleLogout()} className={classes.logout}>
             Logout
           </button>
         </div>

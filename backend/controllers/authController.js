@@ -18,6 +18,7 @@ authController.post("/register", async (req, res) => {
       email: req.body.email,
       username: req.body.username,
       password: hashedPassword,
+      isAdmin: req.body.isAdmin,
     });
     const { password, ...others } = newUser._doc;
     const token = jwt.sign(
@@ -38,7 +39,7 @@ authController.post("/login", async (req, res) => {
     //find user
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
-      throw new Error("Email does not exist");
+      return res.status(404).json("User not found");
     }
 
     //check password

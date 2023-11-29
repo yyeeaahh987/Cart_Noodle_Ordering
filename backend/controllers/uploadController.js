@@ -4,9 +4,9 @@ const { verifyToken } = require("../middlewares/verifyToken");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "./public/images");
+    cb(null, "public/images");
   },
-  filename: (res, file, cb) => {
+  filename: (req, file, cb) => {
     cb(null, req.body.filename);
   },
 });

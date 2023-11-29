@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+// import axios from "axios";
 
 const Create = () => {
   const [title, setTitle] = useState("");
@@ -44,6 +45,15 @@ const Create = () => {
         });
       }
 
+      // const res = await axios.post("http://localhost:5001/auth/login", {
+      //   title,
+      //   description,
+      //   category,
+      //   img: filename,
+      //   price,
+      //   review,
+      // });
+
       const res = await fetch("http://localhost:5001/product", {
         headers: {
           "Content-Type": "application/json",
@@ -52,7 +62,7 @@ const Create = () => {
         method: "POST",
         body: JSON.stringify({
           title,
-          description,
+          desc: description,
           category,
           img: filename,
           price,
@@ -62,7 +72,7 @@ const Create = () => {
 
       const food = await res.json();
 
-      navigate(`/food/${food._id}`);
+      navigate(`/foods/${food._id}`);
     } catch (error) {
       console.error(error.message);
     }

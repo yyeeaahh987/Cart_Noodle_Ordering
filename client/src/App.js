@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import Home from "./components/home/Home";
@@ -13,7 +13,7 @@ import Checkout from "./components/checkout/Checkout";
 
 function App() {
   return (
-    <div>
+    <BrowserRouter>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -26,7 +26,7 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
       </Routes>
       <Footer />
-    </div>
+    </BrowserRouter>
   );
 }
 

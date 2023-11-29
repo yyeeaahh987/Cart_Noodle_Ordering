@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/authSlice";
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,22 +15,20 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-    e.preventDefaulr();
+    e.preventDefault();
 
     try {
-      const res = await fetch("ttp://localhost:5001/auth/login", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify({ email, password }),
+      const res = await axios.post("http://localhost:5001/auth/login", {
+        email,
+        password,
       });
 
-      const data = await res.json();
-      console.log(data);
-      dispatch(login(data));
+      // console.log("dedded", res.data);
+      dispatch(login(res.data));
       navigate("/");
     } catch (error) {
+      // console.log("fdf", error);
+      alert(error.response.data);
       setError(true);
       setTimeout(() => {
         setError(false);
@@ -56,7 +55,9 @@ const Login = () => {
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button className={classes.submitButton}>Login</button>
+            <button type="submit" className={classes.submitButton}>
+              Login
+            </button>
             <p>
               Don't have an account? <Link to="/signup">Sign up</Link>
             </p>
