@@ -15,17 +15,14 @@ const FoodDetails = () => {
 
   useEffect(() => {
     const fetchFoodDetails = async () => {
-      console.log("123123");
       const res = await fetch(`http://localhost:5001/product/find/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("123");
 
       const data = await res.json();
 
-      console.log(data);
       setFoodDetails(data);
     };
     fetchFoodDetails();
@@ -38,21 +35,23 @@ const FoodDetails = () => {
     } else if (type === "add") {
       setQuantity(quantity + 1);
     }
-    console.log("asfdsa" + quantity);
   };
 
   const addToCart = () => {
     dispatch(addProduct({ ...foodDetails, quantity }));
   };
 
+  setTimeout(() => console.log("asfdsa" + quantity), 300);
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
         <div className={classes.left}>
-          <img
-            src={`http://localhost:5001/images/${foodDetails?.img}`}
-            alt=""
-          />
+          {!!foodDetails?.img && (
+            <img
+              src={`http://localhost:5001/images/${foodDetails?.img}`}
+              alt=""
+            />
+          )}
         </div>
         <div className={classes.right}>
           <h2 className={classes.title}>{foodDetails?.title}</h2>

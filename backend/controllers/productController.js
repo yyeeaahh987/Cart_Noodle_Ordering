@@ -20,7 +20,6 @@ productController.get("/find/:id", verifyToken, async (req, res) => {
     if (!product) {
       return res.status(500).json({ msg: "Product not found" });
     }
-    console.log(product);
     return res.status(200).json(product);
   } catch (err) {
     console.error(err);

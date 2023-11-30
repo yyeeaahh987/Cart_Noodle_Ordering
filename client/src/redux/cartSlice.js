@@ -9,18 +9,18 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addProduct: (state, action) => {
-      const product = state.products.find(
-        (product) => product._id === action.payload._id
-      );
-      if (product) {
-        product.quantity += action.payload.quantity;
+      console.log(state, action);
+      if (!state.products) state.products = initialState.products;
+      const p = state.products?.find((p) => p._id === action.payload._id);
+      if (p) {
+        p.quantity += action.payload.quantity;
       } else {
-        state.products.push(action.payload);
+        state.products = [...state.products, action.payload];
       }
     },
     removeProduct: (state, action) => {
       state.products = state.products.filter(
-        (product) => product._id !== action.payload._id
+        (p) => p._id !== action.payload._id
       );
     },
   },
