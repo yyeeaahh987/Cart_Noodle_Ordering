@@ -41,7 +41,6 @@ const FoodDetails = () => {
     dispatch(addProduct({ ...foodDetails, quantity }));
   };
 
-  setTimeout(() => console.log("asfdsa" + quantity), 300);
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
