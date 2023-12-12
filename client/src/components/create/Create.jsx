@@ -19,28 +19,9 @@ const Create = () => {
   const handleCreateProduct = async (e) => {
     e.preventDefault();
 
-    //dispatch(addProduct({ Meat, Vegetable, Drink, price }));
+    dispatch(addProduct({ Meat, Vegetable, Drink, price }));
+    navigate(`/cashout`);
 
-    try {
-      const res = await fetch("http://localhost:5000/product", {
-        headers: {
-          "Content-Type": "application/json",
-          'Authorization': `Bearer ${token}`
-        },
-        method: "POST",
-        body: JSON.stringify({
-          User: user.username,
-          Meat,
-          Vegetable,
-          Drink,
-          price,
-        }),
-      });
-
-      navigate(`/foods`);
-    } catch (error) {
-      console.error(error.message);
-    }
   };
 
   const handleMeatPrice = async () => {

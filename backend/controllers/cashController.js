@@ -8,7 +8,7 @@ cashController.post('/create-payment-intent', async (req, res) => {
       amount: req.body.amount,
       currency: 'usd',
     });
-    res.json({ clientSecret: paymentIntent.client_secret });
+    return res.status(201).json({ clientSecret: paymentIntent.client_secret });
   } catch (error) {
       res.status(500).json({ error: error.message });
   }
