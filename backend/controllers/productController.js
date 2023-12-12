@@ -1,5 +1,5 @@
 const productController = require("express").Router();
-const Product = require("../models/Food");
+const Product = require("../models/Order");
 const { verifyToken, verifyTokenAdmin } = require("../middlewares/verifyToken");
 
 //get all
@@ -12,13 +12,16 @@ productController.get("/", verifyToken, async (req, res) => {
   }
 });
 
-//get one
-productController.get("/find/:id", verifyToken, async (req, res) => {
+//update
+productController.get("/update/:id", verifyTokenAdmin, async (req, res) => {
   try {
     const productID = req.params.id;
     const product = await Product.findById(productID);
     if (!product) {
-      return res.status(500).json({ msg: "Product not found" });
+      return res.status(500).json({ msg: "Order not found" });
+    } else {
+      product.Delivered = true;
+      await product.save();
     }
     return res.status(200).json(product);
   } catch (err) {
@@ -27,7 +30,7 @@ productController.get("/find/:id", verifyToken, async (req, res) => {
 });
 
 //create product
-productController.post("/", verifyTokenAdmin, async (req, res) => {
+productController.post("/", verifyToken, async (req, res) => {
   try {
     const newProduct = await Product.create({ ...req.body });
     return res.status(201).json(newProduct);

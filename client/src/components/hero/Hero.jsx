@@ -1,36 +1,29 @@
 import React from "react";
 import classes from "./hero.module.css";
-import { AiOutlineArrowDown } from "react-icons/ai";
-import manEating from "../../assets/man-having-his-meal.svg";
+import cart_noodles_1 from "../../assets/cart_noodles_1.jpg";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Hero = () => {
+  const { user } = useSelector((state) => state.auth)
+
   return (
     <section id="home" className={classes.container}>
       <div className={classes.wrapper}>
         <div className={classes.left}>
-          <h2 className={classes.title}>Do you crave deliciout food</h2>
-          <p className={classes.firstMsg}>
-            But going out to take <span>food costs time...</span>
-          </p>
-          <p className={classes.secondMsg}>
-            Why not order <span>pizza</span> or something{" "}
-            <span>delicious </span> from our restaurant
-          </p>
-          <p className={classes.desc}>
-            Our restaurant always puts the client above. They are out single
-            most important thing for our business.
-          </p>
-          <div className={classes.buttons}>
-            <button className={classes.buttonOrder}>Order now!</button>
-            <button className={classes.buttonSee}>
-              <a href="#foods">
-                See what's available <AiOutlineArrowDown />
-              </a>
-            </button>
-          </div>
+          <h2 className={classes.title}>Let's Try Cart Noodle!!!</h2>
+          <p className={classes.firstMsg}>Best Cart Noodle in the World</p>
+          <p className={classes.secondMsg}>Delicious and Inexpensive</p>
+          { (user && user.isAdmin == false) && (
+            <div className={classes.buttons}>
+              <button className={classes.buttonSee}>
+                <Link to="/create">Order Now</Link>
+              </button>
+            </div>
+          )}
         </div>
         <div className={classes.right}></div>
-        <img src={manEating} alt="" className={classes.manEatingImg} />
+        <img src={cart_noodles_1} alt="" className={classes.cart_noodles_1} />
       </div>
     </section>
   );

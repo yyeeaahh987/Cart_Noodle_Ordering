@@ -21,13 +21,14 @@
   margin-bottom: 2rem;
   font-size: 32px;
   font-weight: bold;
+  color: navy;
 }
 
 .inputWrapper {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content:flex-start;
   margin-bottom: 0.5rem;
 }
 
@@ -94,7 +95,7 @@
 
 .submitButton {
   width: 100%;
-  background-color: #cea600;
+  background-color: navy;
   color: #fff;
   padding: 0.7rem 1.25rem;
   border-radius: 12px;
@@ -106,6 +107,6 @@
 
 .submitButton:hover {
   background-color: #fff;
-  color: #cea600;
-  border: 1px solid #cea600;
+  color: navy;
+  border: 1px solid navy;
 }

@@ -1,9 +1,10 @@
 const authController = require("express").Router();
+const dotenv = require("dotenv").config();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-//register, req: request, res: response
+//register
 authController.post("/register", async (req, res) => {
   try {
     const isExisting = await User.findOne({ email: req.body.email });
@@ -13,23 +14,21 @@ authController.post("/register", async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
-    // can use "...req.body" to replace "email: req.body.email, username:req.body.username"
-    const newUser = await User.create({
+    const newUser = await User.create({ 
       email: req.body.email,
       username: req.body.username,
       password: hashedPassword,
       isAdmin: req.body.isAdmin,
     });
     const { password, ...others } = newUser._doc;
-    const token = jwt.sign(
-      { id: newUser._id, isAdmin: newUser.isAdmin },
-      process.env.JWT_SECRET_KEY,
-      { expiresIn: "5h" }
+    const token = jwt.sign({ id: newUser._id, isAdmin: newUser.isAdmin },process.env.JWT_SECRET_KEY,
+      { expiresIn: "2h" }
     );
 
-    return res.status(201).json({ ...others, token });
+    return res.status(201).json({ others, token });
+
   } catch (err) {
-    res.status(500).json(err.message);
+    return res.status(500).json(err.message);
   }
 });
 
@@ -39,7 +38,7 @@ authController.post("/login", async (req, res) => {
     //find user
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
-      return res.status(404).json("User not found");
+      throw new Error("No User");
     }
 
     //check password
@@ -49,13 +48,12 @@ authController.post("/login", async (req, res) => {
     }
 
     const { password, ...others } = user._doc;
-    const token = jwt.sign(
-      { id: user._id, isAdmin: user.isAdmin },
-      process.env.JWT_SECRET_KEY,
-      { expiresIn: "5h" }
+    const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin },process.env.JWT_SECRET_KEY,
+      { expiresIn: "2h" }
     );
 
-    return res.status(200).json({ ...others, token });
+    return res.status(200).json({ others, token });
+
   } catch (err) {
     return res.status(500).json(err.message);
   }

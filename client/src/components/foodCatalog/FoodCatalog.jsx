@@ -1,69 +1,88 @@
 import React from "react";
 import classes from "./foodCatalog.module.css";
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
 const FoodCatalog = () => {
   const [filteredFoods, setFilteredFoods] = useState([]);
-  const location = useLocation();
-  // e.g. ['', 'foods', 'burger']
-  const foodEndpoint = location.pathname.split("/")[2];
   const { token } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const fetchFoodType = async () => {
       const res = await fetch(
-        `http://localhost:5001/product?category=${foodEndpoint}`,
+        `http://localhost:5000/product?User=${user.username}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-
       const data = await res.json();
       setFilteredFoods(data);
     };
+
     fetchFoodType();
-  }, [foodEndpoint, token]);
+
+  }, [user.username, token]);
 
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
         {filteredFoods?.length !== 0 && (
-          <h2 className={classes.title}>
-            The best {foodEndpoint} in the region
-          </h2>
+          <h2 className={classes.title}>Your Order</h2>
         )}
         <div className={classes.foods}>
           {filteredFoods.length !== 0 ? (
-            filteredFoods.map((food) => (
-              <Link
-                to={`/food/${food._id}`}
-                key={food._id}
-                className={classes.food}
-              >
-                <div className={classes.imgContainer}>
-                  <img
-                    src={`http://localhost:5001/images/${food.img}`}
-                    className={classes.foodImg}
-                    alt={food.desc}
-                  />
-                </div>
-                <div className={classes.foodDetails}>
-                  <h4 className={classes.Title}>{food.title}</h4>
-                  <span className={classes.price}>
-                    <span>$ </span>
-                    {food.price}
-                  </span>
-                </div>
-              </Link>
-            ))
-          ) : (
-            <h1 className={classes.noQuantity}>No {foodEndpoint} right now</h1>
+            <table className={classes.tablecontent}>
+            <tr>
+              <th>Meat</th>
+              <th>Vegetable</th>
+              <th>Drink</th>
+              <th>Price</th>
+            </tr>
+            {filteredFoods.filter((f) => (f.Delivered == false)).map((f) => (
+                  <tr>
+                    <td>{f.Meat == true ? ("Yes") : ("No")}</td>
+                    <td>{f.Vegetable == true ? ("Yes") : ("No")}</td>
+                    <td>{f.Drink}</td>
+                    <td>{f.price}</td>
+                  </tr>
+            ))}
+            </table>
+            )
+           : (
+            <h1 className={classes.noQuantity}>No Order</h1>
           )}
+        </div>
+      </div>
+      <br></br>
+      <br></br>
+      <br></br>
+      <hr></hr>
+      <div className={classes.wrapper}>
+        {filteredFoods?.length !== 0 && (
+          <h2 className={classes.title}>Order History</h2>
+        )}
+        <div className={classes.foods}>
+          {filteredFoods.length !== 0 && (
+            <table className={classes.tablecontent}>
+            <tr>
+              <th>Meat</th>
+              <th>Vegetable</th>
+              <th>Drink</th>
+              <th>Price</th>
+            </tr>
+            {filteredFoods.filter((f) => (f.Delivered == true)).map((f) => (
+                  <tr>
+                    <td>{f.Meat == true ? ("Yes") : ("No")}</td>
+                    <td>{f.Vegetable == true ? ("Yes") : ("No")}</td>
+                    <td>{f.Drink}</td>
+                    <td>{f.price}</td>
+                  </tr>
+            ))}
+            </table>
+            )}
         </div>
       </div>
     </div>

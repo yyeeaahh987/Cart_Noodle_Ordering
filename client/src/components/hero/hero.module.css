@@ -16,7 +16,7 @@
 }
 
 .title {
-  color: #f00;
+  color: navy;
   font-size: 46px;
   font-weight: bold;
   margin-bottom: 30px;
@@ -65,7 +65,7 @@
   border: 1px solid transparent;
   padding: 0.5rem 1.25rem;
   color: #fff;
-  background-color: #f00;
+  background-color: blue;
   border-radius: 8px;
   font-size: 18px;
   transition: 150ms all;
@@ -98,7 +98,7 @@
   flex: 1;
 }
 
-.manEatingImg {
+.cart_noodles_1 {
   width: 50%;
   height: 85%;
   object-fit: cover;

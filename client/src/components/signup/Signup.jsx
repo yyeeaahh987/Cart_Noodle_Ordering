@@ -1,8 +1,8 @@
 import React from "react";
 import classes from "./signup.module.css";
+import img from "../../assets/cart_noodles_4.jpg";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import img from "../../assets/womaneating.jpg";
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/authSlice";
 import axios from "axios";
@@ -19,7 +19,7 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:5001/auth/register", {
+      const res = await axios.post("http://localhost:5000/auth/register", {
         username,
         email,
         password,

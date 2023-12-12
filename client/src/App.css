@@ -6,3 +6,25 @@
   scroll-behavior: smooth;
   font-family: "Roboto", sans-serif;
 }
+
+table {
+  counter-reset: rowNumber;
+  border-collapse: collapse;
+}
+
+table tr:not(:first-child) {
+  counter-increment: rowNumber;
+  border: 1px solid black;
+}
+
+table tr:not(:first-child) td:first-child::before {   
+  content: counter(rowNumber);   
+  min-width: 1em;   
+  margin-right: 1em;
+}
+
+th, td {
+  padding: 10px;
+  margin: 5px;
+  text-align:center;
+}

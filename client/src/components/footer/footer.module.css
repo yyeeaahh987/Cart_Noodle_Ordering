@@ -71,3 +71,38 @@
 .iconList > *:hover {
   color: #444;
 }
+
+.sendIcon {
+  font-size: 22px;
+}
+
+.inputContainer {
+  width: 400px;
+  height: 70px;
+  border: 1px solid #888;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  border-radius: 20px;
+}
+
+.inputContainer > input {
+  outline: none;
+  border: none;
+  width: 90%;
+  padding: 1rem 0;
+  transition: 150ms all;
+}
+
+.inputContainer > input::placeholder {
+  font-size: 16px;
+}
+
+.inputContainer > input:focus {
+  padding-left: 0.75rem;
+}
+
+.inputContainer:focus-within {
+  border-color: #333;
+}

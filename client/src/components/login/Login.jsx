@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./login.module.css";
-import img from "../../assets/womaneating2.jpg";
+import img from "../../assets/cart_noodles_2.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -18,16 +18,14 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:5001/auth/login", {
+      const res = await axios.post("http://localhost:5000/auth/login", {
         email,
         password,
       });
 
-      // console.log("dedded", res.data);
       dispatch(login(res.data));
       navigate("/");
     } catch (error) {
-      // console.log("fdf", error);
       alert(error.response.data);
       setError(true);
       setTimeout(() => {
