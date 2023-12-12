@@ -15,11 +15,14 @@ const FoodDetails = () => {
 
   useEffect(() => {
     const fetchFoodDetails = async () => {
-      const res = await fetch(`http://localhost:5001/product/find/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/product/find/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       const data = await res.json();
 
@@ -47,7 +50,7 @@ const FoodDetails = () => {
         <div className={classes.left}>
           {!!foodDetails?.img && (
             <img
-              src={`http://localhost:5001/images/${foodDetails?.img}`}
+              src={`${process.env.REACT_APP_SERVER_URL}/images/${foodDetails?.img}`}
               alt=""
             />
           )}

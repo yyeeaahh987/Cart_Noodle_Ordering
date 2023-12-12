@@ -11,7 +11,7 @@ const FoodCatalog = () => {
   useEffect(() => {
     const fetchFoodType = async () => {
       const res = await fetch(
-        `http://localhost:5000/product?User=${user.username}`,
+        `${process.env.REACT_APP_SERVER_URL}/product?User=${user.username}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -23,7 +23,6 @@ const FoodCatalog = () => {
     };
 
     fetchFoodType();
-
   }, [user.username, token]);
 
   return (
@@ -35,23 +34,24 @@ const FoodCatalog = () => {
         <div className={classes.foods}>
           {filteredFoods.length !== 0 ? (
             <table className={classes.tablecontent}>
-            <tr>
-              <th>Meat</th>
-              <th>Vegetable</th>
-              <th>Drink</th>
-              <th>Price</th>
-            </tr>
-            {filteredFoods.filter((f) => (f.Delivered == false)).map((f) => (
+              <tr>
+                <th>Meat</th>
+                <th>Vegetable</th>
+                <th>Drink</th>
+                <th>Price</th>
+              </tr>
+              {filteredFoods
+                .filter((f) => f.Delivered == false)
+                .map((f) => (
                   <tr>
-                    <td>{f.Meat == true ? ("Yes") : ("No")}</td>
-                    <td>{f.Vegetable == true ? ("Yes") : ("No")}</td>
+                    <td>{f.Meat == true ? "Yes" : "No"}</td>
+                    <td>{f.Vegetable == true ? "Yes" : "No"}</td>
                     <td>{f.Drink}</td>
                     <td>{f.price}</td>
                   </tr>
-            ))}
+                ))}
             </table>
-            )
-           : (
+          ) : (
             <h1 className={classes.noQuantity}>No Order</h1>
           )}
         </div>
@@ -67,22 +67,24 @@ const FoodCatalog = () => {
         <div className={classes.foods}>
           {filteredFoods.length !== 0 && (
             <table className={classes.tablecontent}>
-            <tr>
-              <th>Meat</th>
-              <th>Vegetable</th>
-              <th>Drink</th>
-              <th>Price</th>
-            </tr>
-            {filteredFoods.filter((f) => (f.Delivered == true)).map((f) => (
+              <tr>
+                <th>Meat</th>
+                <th>Vegetable</th>
+                <th>Drink</th>
+                <th>Price</th>
+              </tr>
+              {filteredFoods
+                .filter((f) => f.Delivered == true)
+                .map((f) => (
                   <tr>
-                    <td>{f.Meat == true ? ("Yes") : ("No")}</td>
-                    <td>{f.Vegetable == true ? ("Yes") : ("No")}</td>
+                    <td>{f.Meat == true ? "Yes" : "No"}</td>
+                    <td>{f.Vegetable == true ? "Yes" : "No"}</td>
                     <td>{f.Drink}</td>
                     <td>{f.price}</td>
                   </tr>
-            ))}
+                ))}
             </table>
-            )}
+          )}
         </div>
       </div>
     </div>

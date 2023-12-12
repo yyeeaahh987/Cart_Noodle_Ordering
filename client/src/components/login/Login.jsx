@@ -18,13 +18,20 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:5000/auth/login", {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/auth/login`,
+        {
+          email,
+          password,
+        }
+      );
 
       dispatch(login(res.data));
-      navigate("/");
+      if (res.data["others"]["isAdmin"]) {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       alert(error.response.data);
       setError(true);

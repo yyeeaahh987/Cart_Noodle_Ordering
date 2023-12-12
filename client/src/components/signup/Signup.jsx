@@ -19,11 +19,14 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:5000/auth/register", {
-        username,
-        email,
-        password,
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/auth/register`,
+        {
+          username,
+          email,
+          password,
+        }
+      );
       // const res = await fetch("http://localhost:5001/auth/register", {
       //   headers: {
       //     "Content-Type": "application/json",
